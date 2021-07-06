@@ -1,47 +1,35 @@
+import produce from "immer";
 import { Todo, TodoDispatchTypes, TodoState } from "../types";
 
 export const initialState: TodoState = {
   todos: [],
 };
 
-const todoReducer = (
-  draftState: TodoState = initialState,
-  action: TodoDispatchTypes
-) => {
-  switch (action.type) {
-    case "ADD_TODO":
-      {
-        console.log("added", draftState.todos);
+const todoReducer = produce(
+  (draftState: TodoState = initialState, action: TodoDispatchTypes) => {
+    switch (action.type) {
+      case "ADD_TODO": {
         const todo: Todo = {
-          id: draftState.todos.length || 0,
+          id: draftState.todos.length,
           text: action.payload,
           done: false,
         };
-
-        return {
-          ...draftState,
-          todos: [...draftState.todos, todo],
-        };
+        draftState.todos.push(todo);
+        return;
       }
-      break;
-    case "REMOVE_TODO": {
-      console.log(
-        "pauload",
-        draftState.todos.map((re) => re),
-        action
-      );
-      const todocopy = draftState.todos.filter(
-        (res) => res.id !== action.payload
-      );
-      return {
-        ...draftState,
-        todos: todocopy,
-      };
-    }
 
-    default: {
-      return draftState;
+      case "REMOVE_TODO": {
+        draftState.todos = draftState.todos.filter(
+          (res) => res.id !== action.payload
+        );
+        return;
+      }
+
+      default: {
+        return draftState;
+      }
     }
   }
-};
+);
+
 export default todoReducer;

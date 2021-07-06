@@ -1,16 +1,20 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTodoDispatch, useTodoState } from "./context/todoContext";
 import { ARemoveTodo } from "./redux/action/action";
 import { IState } from "./redux/reducer/rootReducer";
 
 const Todo = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const dispatch = useTodoDispatch();
+  const { todos } = useTodoState();
 
-  const todos = useSelector((state: IState) => state.todoReducer.todos);
+  // const todos = useSelector((state: IState) => state.todoReducer.todos);
 
   const removeTodo = useCallback(
     (id: number) => {
-      dispatch(ARemoveTodo(id));
+      // dispatch(ARemoveTodo(id));
+      dispatch({ type: "REMOVE_TODO", payload: id });
     },
     [dispatch]
   );
