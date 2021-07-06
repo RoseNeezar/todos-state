@@ -12,7 +12,6 @@ function App() {
   const onAddTodo = useCallback(() => {
     if (newTodoRef.current?.value) {
       if (newTodoRef.current.value.length > 0) {
-        console.log(newTodoRef.current.value);
         dispatch(AAddTodo(newTodoRef.current.value));
         newTodoRef.current.value = "";
       }

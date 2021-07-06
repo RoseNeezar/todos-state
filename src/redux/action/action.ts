@@ -8,6 +8,5 @@ export const AAddTodo =
 
 export const ARemoveTodo =
   (param: Todo["id"]) => (dispatch: Dispatch<TodoDispatchTypes>) => {
-    console.log("click", param);
     dispatch({ type: REMOVE_TODO, payload: param });
   };

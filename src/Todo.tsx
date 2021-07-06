@@ -14,7 +14,6 @@ const Todo = () => {
     },
     [dispatch]
   );
-  console.log(todos);
   return (
     <div className="mt-7">
       {todos ? (
