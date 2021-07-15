@@ -9,9 +9,9 @@ import { TodoProvider } from "./context/todoContext";
 ReactDOM.render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
-    <TodoProvider>
-      <App />
-    </TodoProvider>
+    {/* <TodoProvider> */}
+    <App />
+    {/* </TodoProvider> */}
 
     {/* </Provider> */}
   </React.StrictMode>,

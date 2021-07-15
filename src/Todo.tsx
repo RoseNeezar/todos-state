@@ -3,20 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTodoDispatch, useTodoState } from "./context/todoContext";
 import { ARemoveTodo } from "./redux/action/action";
 import { IState } from "./redux/reducer/rootReducer";
+import { useTodoStore } from "./zustand/useTodo";
 
 const Todo = () => {
   // const dispatch = useDispatch();
   const dispatch = useTodoDispatch();
-  const { todos } = useTodoState();
+  // const { todos } = useTodoState();
+
+  const { todos, removeTodo: remove } = useTodoStore();
 
   // const todos = useSelector((state: IState) => state.todoReducer.todos);
 
   const removeTodo = useCallback(
     (id: number) => {
       // dispatch(ARemoveTodo(id));
-      dispatch({ type: "REMOVE_TODO", payload: id });
+      // dispatch({ type: "REMOVE_TODO", payload: id });
+      remove(id);
     },
-    [dispatch]
+    [remove]
   );
   return (
     <div className="mt-7">
@@ -24,12 +28,12 @@ const Todo = () => {
         todos.map((re) => (
           <div
             key={re.id}
-            className="bg-gray-300 w-80 mt-2 h-14 flex items-center rounded-md justify-between "
+            className="flex items-center justify-between mt-2 bg-gray-300 rounded-md w-80 h-14 "
           >
-            <p className="text-2xl font-bold text-gray-500 ml-4">{re.text}</p>
+            <p className="ml-4 text-2xl font-bold text-gray-500">{re.text}</p>
             <button
               onClick={() => removeTodo(re.id)}
-              className="bg-red-400 text-white p-2 rounded-md m-4"
+              className="p-2 m-4 text-white bg-red-400 rounded-md"
             >
               Delete
             </button>
