@@ -1,5 +1,4 @@
 import create from "zustand";
-import { combine } from "zustand/middleware";
 import { Todo } from "../redux/types";
 import { combineAndImmer } from "./combineAndImmer";
 
@@ -7,6 +6,7 @@ export const useTodoStore = create(
   combineAndImmer(
     {
       todos: [] as Todo[],
+      isDone: false,
     },
     (set, get) => ({
       addTodo: (title: string) => {
@@ -22,6 +22,7 @@ export const useTodoStore = create(
       removeTodo: (id: number) => {
         set((s) => {
           s.todos = s.todos.filter((res) => res.id !== id);
+          s.isDone = !s.isDone;
         });
       },
     })

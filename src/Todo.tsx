@@ -10,7 +10,15 @@ const Todo = () => {
   const dispatch = useTodoDispatch();
   // const { todos } = useTodoState();
 
-  const { todos, removeTodo: remove } = useTodoStore();
+  const { todos, removeTodo: remove } = useTodoStore(
+    useCallback(
+      (state) => ({
+        todos: state.todos,
+        removeTodo: state.removeTodo,
+      }),
+      []
+    )
+  );
 
   // const todos = useSelector((state: IState) => state.todoReducer.todos);
 

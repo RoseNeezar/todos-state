@@ -10,7 +10,9 @@ import shallow from "zustand/shallow";
 function App() {
   const dispatch = useTodoDispatch();
   // const dispatch = useDispatch();
-  const { addTodo } = useTodoStore();
+  const { addTodo } = useTodoStore(
+    useCallback((state) => ({ addTodo: state.addTodo }), [])
+  );
 
   const newTodoRef = useRef<HTMLInputElement>(null);
 
